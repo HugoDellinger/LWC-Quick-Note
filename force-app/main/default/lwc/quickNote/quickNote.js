@@ -103,6 +103,7 @@ export default class QuickNote extends LightningElement {
   }
 
   handleErrors({ error }) {
+    console.error(error); // eslint-disable-line no-console
     const errorMessage = error.body || error.message || error;
     const event = new ShowToastEvent({
       title: "An error occured while saving your quick note",
