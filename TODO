@@ -4,8 +4,11 @@ Todo:
   ✘ Ensure it properly shows a spinner when an external data change happen -> not necessary @cancelled(20-05-03 14:03)
   ✔ Ensure it awaits initial loading before enabling input @started(20-05-03 13:08) @done(20-05-03 14:03) @lasted(55m38s)
   ✔ Add an indicator to display if the content has changed @done(20-05-03 14:51)
-  ☐ Save an existing note on click 
-  ☐ Save a new note on click
+  ✔ Save an existing note on click @started(20-05-03 14:54) @done(20-05-03 15:49) @lasted(55m40s)
+  ✔ Save a new note on click @done(20-05-03 15:49)
+  ✔ Manage keyboard shortcut for save @started(20-05-03 15:55) @done(20-05-03 16:29) @lasted(34m11s)
+  ☐ Save only if it has focus
+  ☐ Show a toaster on successful save and for errors 
 
 Nice to have:
   ☐ Add an option to set focus on initial load

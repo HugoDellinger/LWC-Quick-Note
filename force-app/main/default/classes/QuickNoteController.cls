@@ -16,4 +16,14 @@ public with sharing class QuickNoteController {
       return null;
     return contentDocumentLinks[0].ContentDocument.Id;
   }
+
+  @AuraEnabled
+  public static void createNoteLink(Id noteId, Id recordId) {
+    insert new ContentDocumentLink(
+      ContentDocumentId = noteId,
+      LinkedEntityId = recordId,
+      ShareType = 'I',
+      Visibility = 'AllUsers'
+    );
+  }
 }

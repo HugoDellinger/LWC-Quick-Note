@@ -14,7 +14,8 @@
         alternative-text="Save"
         style="position:absolute;bottom:5px;right:5px;"
         title="Save"
-        disabled={isContentSameAsBefore}
+        onclick={handleSave}
+        disabled={isSaveDisabled}
       ></lightning-button-icon>
     </div>
   </div>
