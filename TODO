@@ -13,6 +13,7 @@ Todo:
   ✔ Fix large text equality bug @started(20-05-03 17:37) @done(20-05-03 17:51) @lasted(14m38s)
   ✔ Keep cursor position on save @done(20-05-03 17:59)
   ✔ Fix error invalid status @done(20-05-03 18:08)
+  ☐ Add a deploy to Salesforce button
 
 Nice to have:
   ☐ Add an option to set focus on initial load
