@@ -8,3 +8,4 @@ It's build on the LWC framework using the wire service and using standard compon
 
 ![Quick Demo](https://media.giphy.com/media/TgrvyxjdbUXCxsv5dE/source.gif)
 
+Quick deploy: https://githubsfdeploy.herokuapp.com/app/githubdeploy/HugoDellinger/LWC-Quick-Note?ref=master
