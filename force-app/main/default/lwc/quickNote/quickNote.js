@@ -39,13 +39,17 @@ export default class QuickNote extends LightningElement {
   noteRecordContent; // To prevent decoding the content everytime we want to check equality with current content, we store the decoded string
   htmlContent;
   get isContentSameAsBefore() {
+    console.log({
+      noteRecordContent: this.noteRecordContent,
+      htmlContent: this.htmlContent
+    });
     return this.noteRecordContent == this.htmlContent; // eslint-disable-line eqeqeq
   }
   handleContentChange({ target }) {
     this.htmlContent = target.value;
   }
   get isSaveDisabled() {
-    return this.isContentSameAsBefore === true || this.isSaving === true;
+    return this.isContentSameAsBefore === true || this.isLoading === true;
   }
 
   async insertNote() {
@@ -73,7 +77,8 @@ export default class QuickNote extends LightningElement {
   // # Save data
   async handleSave() {
     try {
-      if (this.isContentSameAsBefore || this.isSaving) return; // don't save if the content is the same as before
+      if (this.isContentSameAsBefore === true || this.isLoading === true)
+        return; // don't save if the content is the same as before
       this.isSaving = true;
       if (this.noteRecord == null) {
         await this.insertNote();

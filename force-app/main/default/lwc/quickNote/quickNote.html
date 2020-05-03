@@ -10,15 +10,18 @@
       onblur={handleBlur}
     ></lightning-input-rich-text>
     <div>
-      <lightning-button-icon
+      <lightning-button-stateful
         icon-name="utility:save"
         variant="border-filled"
         alternative-text="Save"
         style="position:absolute;bottom:5px;right:5px;"
-        title="Save"
+        label-when-off="Save..."
+        label-when-on="Saved"
+        icon-name-when-off="utility:save"
+        icon-name-when-on="utility:check"
+        selected={isSaveDisabled}
         onclick={handleSave}
-        disabled={isSaveDisabled}
-      ></lightning-button-icon>
+      ></lightning-button-stateful>
     </div>
   </div>
 </template>
