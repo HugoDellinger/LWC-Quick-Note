@@ -93,13 +93,22 @@ export default class QuickNote extends LightningElement {
       this.isSaving = false;
     }
   }
+  hasFocus = false;
   async handleKeyboardSave(event) {
     if (
       (event.ctrlKey === true || event.metaKey === true) &&
-      event.keyCode === 83
+      event.keyCode === 83 && // S keyCode
+      this.hasFocus === true
     ) {
+      event.preventDefault();
       await this.handleSave();
     }
+  }
+  handleFocus() {
+    this.hasFocus = true;
+  }
+  handleBlur() {
+    this.hasFocus = false;
   }
 
   handleErrors({ error }) {

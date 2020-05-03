@@ -6,6 +6,8 @@
     <lightning-input-rich-text
       value={htmlContent}
       onchange={handleContentChange}
+      onfocus={handleFocus}
+      onblur={handleBlur}
     ></lightning-input-rich-text>
     <div>
       <lightning-button-icon

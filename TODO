@@ -7,9 +7,15 @@ Todo:
   ✔ Save an existing note on click @started(20-05-03 14:54) @done(20-05-03 15:49) @lasted(55m40s)
   ✔ Save a new note on click @done(20-05-03 15:49)
   ✔ Manage keyboard shortcut for save @started(20-05-03 15:55) @done(20-05-03 16:29) @lasted(34m11s)
-  ☐ Save only if it has focus
+  ✔ Save only if it has focus @started(20-05-03 16:52) @done(20-05-03 17:23) @lasted(31m8s)
   ✔ Show a toaster on successful save and for errors @started(20-05-03 16:34) @done(20-05-03 16:41) @lasted(7m7s)
 
 Nice to have:
   ☐ Add an option to set focus on initial load
+
+To explore: 
+  ☐ Select which note to use
+  ☐ Allow for templates
+  ☐ Actions in-line
+
 
