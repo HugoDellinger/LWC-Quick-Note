@@ -3,6 +3,9 @@
   xmlns="http://soap.sforce.com/2006/04/metadata"
   fqn="quickNote"
 >
+<masterLabel>Quick Note</masterLabel>
+  <description
+  >Component enabling qui note taking and display on records</description>
     <apiVersion>48.0</apiVersion>
     <isExposed>true</isExposed>
     <targets>
