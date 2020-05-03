@@ -82,6 +82,11 @@ export default class QuickNote extends LightningElement {
         await this.updateNote();
         refreshApex(this.noteRecord);
       }
+      const event = new ShowToastEvent({
+        title: "Quick Note saved",
+        variant: "success"
+      });
+      this.dispatchEvent(event);
     } catch (error) {
       this.handleErrors({ error });
     } finally {
@@ -98,7 +103,13 @@ export default class QuickNote extends LightningElement {
   }
 
   handleErrors({ error }) {
-    console.error(error);
+    const errorMessage = error.body || error.message || error;
+    const event = new ShowToastEvent({
+      title: "An error occured while saving your quick note",
+      message: errorMessage,
+      variant: "error"
+    });
+    this.dispatchEvent(event);
   }
 
   @wire(retrieveQuickContentDocumentIdForRecordId, { recordId: "$recordId" })
