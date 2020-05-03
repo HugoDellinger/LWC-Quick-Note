@@ -1,6 +1,5 @@
 import { LightningElement, wire, api, track } from "lwc";
 import { updateRecord, createRecord, getRecord } from "lightning/uiRecordApi";
-import { refreshApex } from "@salesforce/apex";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 import CN_ID_FIELD from "@salesforce/schema/ContentNote.Id";
@@ -20,14 +19,9 @@ export default class QuickNote extends LightningElement {
   // enables us to stop displaying the spinner if no existing note has been found
   // and thus no subsequent data loading happen
   initialLoading = true;
-  dataLoading = false;
   isSaving = false;
   get isLoading() {
-    return (
-      this.initialLoading === true ||
-      this.dataLoading === true ||
-      this.isSaving === true
-    );
+    return this.initialLoading === true || this.isSaving === true;
   }
 
   renderedCallback() {
@@ -39,10 +33,6 @@ export default class QuickNote extends LightningElement {
   noteRecordContent; // To prevent decoding the content everytime we want to check equality with current content, we store the decoded string
   htmlContent;
   get isContentSameAsBefore() {
-    console.log({
-      noteRecordContent: this.noteRecordContent,
-      htmlContent: this.htmlContent
-    });
     return this.noteRecordContent == this.htmlContent; // eslint-disable-line eqeqeq
   }
   handleContentChange({ target }) {
@@ -57,12 +47,15 @@ export default class QuickNote extends LightningElement {
       [CN_CONTENT_FIELD.fieldApiName]: window.btoa(this.htmlContent),
       [CN_TITLE_FIELD.fieldApiName]: "QuickNote"
     };
-    const noteRecord = await createRecord({
+    this.noteRecord = await createRecord({
       apiName: CN_OBJECT.objectApiName,
       fields
     });
-    this.noteRecord = noteRecord;
-    await createNoteLink({ noteId: noteRecord.id, recordId: this.recordId });
+    this.noteRecordContent = this.htmlContent;
+    await createNoteLink({
+      noteId: this.noteRecord.id,
+      recordId: this.recordId
+    });
   }
 
   async updateNote() {
@@ -71,7 +64,8 @@ export default class QuickNote extends LightningElement {
       [CN_CONTENT_FIELD.fieldApiName]: window.btoa(this.htmlContent),
       [CN_TITLE_FIELD.fieldApiName]: "QuickNote"
     };
-    await updateRecord({ fields });
+    this.noteRecord = await updateRecord({ fields });
+    this.noteRecordContent = this.htmlContent;
   }
 
   // # Save data
@@ -82,10 +76,8 @@ export default class QuickNote extends LightningElement {
       this.isSaving = true;
       if (this.noteRecord == null) {
         await this.insertNote();
-        refreshApex(this.quickContentDocumentVersionId);
       } else {
         await this.updateNote();
-        refreshApex(this.noteRecord);
       }
       const event = new ShowToastEvent({
         title: "Quick Note saved",
@@ -130,14 +122,14 @@ export default class QuickNote extends LightningElement {
   @wire(retrieveQuickContentDocumentIdForRecordId, { recordId: "$recordId" })
   wiredContentDocumentId({ error, data }) {
     if (error) return this.handleErrors(); // TODO: error handling
-
-    if (data !== undefined) {
-      this.initialLoading = false;
+    if (this.initialLoading === true && data !== undefined) {
       if (data !== null) {
-        this.dataLoading = true;
         this.quickContentDocumentVersionId = data;
+      } else {
+        this.initialLoading = false;
       }
     }
+
     return null;
   }
 
@@ -147,16 +139,21 @@ export default class QuickNote extends LightningElement {
   })
   wiredContentDocument({ error, data }) {
     if (error) return this.handleErrors();
-    this.noteRecord = data;
-    if (this.noteRecord != null) {
-      const encodedContent = this.noteRecord.fields.Content.value;
-      this.htmlContent = window.atob(encodedContent);
-      this.noteRecordContent = this.htmlContent;
-    } else {
-      this.htmlContent = null;
-      this.noteRecordContent = null;
+    if (this.initialLoading === true && data !== undefined) {
+      this.noteRecord = data;
+      if (this.noteRecord != null) {
+        const encodedContent = this.noteRecord.fields.Content.value;
+        this.htmlContent = window.atob(encodedContent);
+        this.template.querySelector(
+          "lightning-input-rich-text"
+        ).value = this.htmlContent; // The content is not binded to prevent loss of focus on rerender
+        this.noteRecordContent = this.htmlContent;
+      } else {
+        this.htmlContent = null;
+        this.noteRecordContent = null;
+      }
+      this.initialLoading = false;
     }
-    this.dataLoading = false;
     return null;
   }
 }

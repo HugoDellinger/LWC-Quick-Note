@@ -10,7 +10,8 @@ Todo:
   ✔ Save only if it has focus @started(20-05-03 16:52) @done(20-05-03 17:23) @lasted(31m8s)
   ✔ Show a toaster on successful save and for errors @started(20-05-03 16:34) @done(20-05-03 16:41) @lasted(7m7s)
   ✔ Improved state display @started(20-05-03 17:26) @done(20-05-03 17:32) @lasted(6m54s)
-  ☐ Fix large text equality bug @started(20-05-03 17:37)
+  ✔ Fix large text equality bug @started(20-05-03 17:37) @done(20-05-03 17:51) @lasted(14m38s)
+  ✔ Keep cursor position on save @done(20-05-03 17:59)
 
 Nice to have:
   ☐ Add an option to set focus on initial load
