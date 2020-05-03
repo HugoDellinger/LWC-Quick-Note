@@ -70,9 +70,8 @@ export default class QuickNote extends LightningElement {
 
   // # Save data
   async handleSave() {
+    if (this.isContentSameAsBefore === true || this.isLoading === true) return; // don't save if the content is the same as before
     try {
-      if (this.isContentSameAsBefore === true || this.isLoading === true)
-        return; // don't save if the content is the same as before
       this.isSaving = true;
       if (this.noteRecord == null) {
         await this.insertNote();
