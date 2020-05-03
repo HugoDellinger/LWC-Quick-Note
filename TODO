@@ -1,0 +1,12 @@
+Todo:
+  ✔ Decode Base 64 and display it @started(20-05-03 12:57) @done(20-05-03 13:08) @lasted(11m45s)
+  ✔ Ensure that it reloads the data in case of an external note change @done(20-05-03 13:01)
+  ✘ Ensure it properly shows a spinner when an external data change happen -> not necessary @cancelled(20-05-03 14:03)
+  ✔ Ensure it awaits initial loading before enabling input @started(20-05-03 13:08) @done(20-05-03 14:03) @lasted(55m38s)
+  ✔ Add an indicator to display if the content has changed @done(20-05-03 14:51)
+  ☐ Save an existing note on click 
+  ☐ Save a new note on click
+
+Nice to have:
+  ☐ Add an option to set focus on initial load
+

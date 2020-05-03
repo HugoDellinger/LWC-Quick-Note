@@ -1,3 +1,21 @@
 <template>
-  Hello world
+  <div class="slds-is-relative">
+    <template if:true={isLoading}>
+      <lightning-spinner alternative-text="Loading"></lightning-spinner>
+    </template>
+    <lightning-input-rich-text
+      value={htmlContent}
+      onchange={handleContentChange}
+    ></lightning-input-rich-text>
+    <div>
+      <lightning-button-icon
+        icon-name="utility:save"
+        variant="border-filled"
+        alternative-text="Save"
+        style="position:absolute;bottom:5px;right:5px;"
+        title="Save"
+        disabled={isContentSameAsBefore}
+      ></lightning-button-icon>
+    </div>
+  </div>
 </template>
